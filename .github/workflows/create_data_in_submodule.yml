@@ -24,8 +24,8 @@ jobs:
 
       - name: Initialize the submodule
         run: |
-          git -c=core.sshCommand="ssh -i ~/.ssh/gh-actions-sandbox-submodule -F /dev/null" submodule init
-          git -c=core.sshCommand="ssh -i ~/.ssh/gh-actions-sandbox-submodule -F /dev/null" submodule update
+          git -c core.sshCommand="ssh -i ~/.ssh/gh-actions-sandbox-submodule -F /dev/null" submodule init
+          git -c core.sshCommand="ssh -i ~/.ssh/gh-actions-sandbox-submodule -F /dev/null" submodule update
 
       - name: Setup Python 3.9
         uses: actions/setup-python@v2
@@ -40,7 +40,7 @@ jobs:
         run: |
           git add .
           git commit -a -m "Add a new text file by ${GITHUB_ACTOR}"
-          git -c=core.sshCommand "ssh -i ~/.ssh/gh-actions-sandbox-submodule -F /dev/null" push origin HEAD:main
+          git -c core.sshCommand="ssh -i ~/.ssh/gh-actions-sandbox-submodule -F /dev/null" push origin HEAD:main
 
       - name: Update the submodule ref
         working-directory: ./
