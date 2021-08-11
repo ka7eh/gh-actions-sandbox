@@ -17,7 +17,20 @@ jobs:
           python-version: '3.9'
       - name: Generate a new text file in the submodule
         run: python generate_data.py ${GITHUB_ACTOR}
-      - name: Set git config
+      - name: Create ssh key for gh-actions-sandbox
+        run: |
+          mkdir -p ~/.ssh
+          cat << EOF > ~/.ssh/gh-actions-sandbox
+          ${{ secrets.SSH_KEY_PARENT_MODULE }}
+          EOF
+          chmod 600 ~/.ssh/gh-actions-sandbox
+      - name: Create ssh key for gh-actions-sandbox-submodule
+        run: |
+          cat << EOF > ~/.ssh/gh-actions-sandbox-submodule
+          ${{ secrets.SSH_KEY_SUBMODULE }}
+          EOF
+          chmod 600 ~/.ssh/gh-actions-sandbox-submodule
+      - name: Set git global config
         run: |
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "bot@noreply.github.com"
@@ -26,10 +39,12 @@ jobs:
         run: |
           git add .
           git commit -a -m "Add a new text file by ${GITHUB_ACTOR}"
+          git config core.sshCommand "ssh -i ~/.ssh/gh-actions-sandbox-submodule -F /dev/null"
           git push origin HEAD:main
       - name: Update the submodule ref
         working-directory: ./
         run: |
           git add .
           git commit -a -m "Update submodule ref"
+          git config core.sshCommand "ssh -i ~/.ssh/gh-actions-sandbox -F /dev/null"
           git push
