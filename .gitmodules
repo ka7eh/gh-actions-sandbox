@@ -1,0 +1,3 @@
+[submodule "gh-actions-sandbox-submodule"]
+	path = gh-actions-sandbox-submodule
+	url = git@github.com:ka7eh/gh-actions-sandbox-submodule.git
