@@ -38,10 +38,10 @@ jobs:
       - name: Commit the submodule changes
         working-directory: ./gh-actions-sandbox-submodule
         run: |
-          cat ../.git/modules/gh-actions-sandbox-submodule/config
           git add .
           git commit -a -m "Add a new text file by ${GITHUB_ACTOR}"
           git config core.sshCommand "ssh -i ~/.ssh/gh-actions-sandbox-submodule -F /dev/null"
+          cat ../.git/modules/gh-actions-sandbox-submodule/config
           git push origin HEAD:main
       - name: Update the submodule ref
         working-directory: ./
