@@ -32,7 +32,6 @@ jobs:
           chmod 600 ~/.ssh/gh-actions-sandbox-submodule
           cat ~/.ssh/gh-actions-sandbox
           cat ~/.ssh/gh-actions-sandbox-submodule
-          cat ~/.gitconfig
       - name: Set git global config
         run: |
           git config --global user.name "${GITHUB_ACTOR}"
@@ -51,3 +50,5 @@ jobs:
           git commit -a -m "Update submodule ref"
           git config core.sshCommand "ssh -i ~/.ssh/gh-actions-sandbox -F /dev/null"
           git push
+      - name: Delete ssh keys
+        run: rm -f ~/.ssh/*
