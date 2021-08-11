@@ -27,9 +27,12 @@ jobs:
       - name: Create ssh key for gh-actions-sandbox-submodule
         run: |
           cat << EOF > ~/.ssh/gh-actions-sandbox-submodule
-          ${{ secrets.SSH_KEY_SUBMODULE }}
+          ${{ secrets.SSH_KEY_SUB_MODULE }}
           EOF
           chmod 600 ~/.ssh/gh-actions-sandbox-submodule
+          cat ~/.ssh/gh-actions-sandbox
+          cat ~/.ssh/gh-actions-sandbox-submodule
+          cat ~/.gitconfig
       - name: Set git global config
         run: |
           git config --global user.name "${GITHUB_ACTOR}"
