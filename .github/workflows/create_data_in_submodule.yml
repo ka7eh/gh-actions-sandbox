@@ -17,6 +17,8 @@ jobs:
           python-version: '3.9'
       - name: Generate a new text file in the submodule
         run: python generate_data.py ${GITHUB_ACTOR}
+      - name: Set git config
+        run: git config --global user.name '${GITHUB_ACTOR}'
       - name: Commit the submodule changes
         working-directory: ./gh-actions-sandbox-submodule
         run: |
