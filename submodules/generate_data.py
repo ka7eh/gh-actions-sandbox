@@ -2,7 +2,7 @@ import argparse
 from datetime import datetime
 from pathlib import Path
 
-WORK_DIR = Path("./gh-actions-sandbox-submodule")
+WORK_DIR = Path("../gh-actions-sandbox-submodule")
 
 parser = argparse.ArgumentParser(description="Generate a text file")
 parser.add_argument(dest="author", type=str, help="Creator of the text file")
