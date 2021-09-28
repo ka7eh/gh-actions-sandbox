@@ -51,7 +51,7 @@ jobs:
         env:
           # The following are needed for dropdb and createdb commands in run_tests.sh
           PGHOST: $POSTGRES_SERVER
-          PGPORT: $POSTGRES_PORT
+          PGPORT: 5432
           PGUSER: $POSTGRES_USER
           PGPASSWORD: $POSTGRES_PASSWORD
 
