@@ -50,10 +50,10 @@ jobs:
         run: createdb test_db
         env:
           # The following are needed for dropdb and createdb commands in run_tests.sh
-          PGHOST: $POSTGRES_SERVER
-          PGPORT: 5432
-          PGUSER: $POSTGRES_USER
-          PGPASSWORD: $POSTGRES_PASSWORD
+          PGHOST: ${{ env.POSTGRES_SERVER }}
+          PGPORT: ${{ env.POSTGRES_PORT }}
+          PGUSER: ${{ env.POSTGRES_USER }}
+          PGPASSWORD: ${{ env.POSTGRES_PASSWORD }}
 
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
