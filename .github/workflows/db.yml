@@ -13,6 +13,13 @@ jobs:
     # Docker Hub image that `container-job` executes in
     container: node:10.18-jessie
 
+    env:
+      POSTGRES_SERVER: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_TEST_DB: tests_oceans1876
+
     # Service containers to run with `container-job`
     services:
       # Label used to access the service container
@@ -33,6 +40,15 @@ jobs:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
         uses: actions/checkout@v2
+      
+      - name: Create a test database
+        run: createdb test_db
+        env:
+          # The following are needed for dropdb and createdb commands in run_tests.sh
+          PGHOST: $POSTGRES_SERVER
+          PGPORT: $POSTGRES_PORT
+          PGUSER: $POSTGRES_USER
+          PGPASSWORD: $POSTGRES_PASSWORD
 
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
