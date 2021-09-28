@@ -41,6 +41,11 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       
+      - name: Install PostgreSQL client
+        run: |
+          apt-get update
+          apt-get install -y postgresql-client
+      
       - name: Create a test database
         run: createdb test_db
         env:
