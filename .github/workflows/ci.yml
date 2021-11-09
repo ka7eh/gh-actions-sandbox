@@ -42,7 +42,7 @@ jobs:
           BUILDNUMBER: ${{ github.run_number }}
           GITSHA1: ${{ github.sha }}
         with:
-          name: gh-actions-sandbox/python-simple-server
+          name: ka7eh/gh-actions-sandbox/python-simple-server
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
