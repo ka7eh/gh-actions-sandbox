@@ -1,3 +1,0 @@
-[submodule "git-sandbox-submodule"]
-	path = git-sandbox-submodule
-	url = git@github.com:ka7eh/git-sandbox-submodule.git
