@@ -18,7 +18,6 @@ jobs:
       POSTGRES_PORT: 5432
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_TEST_DB: tests_oceans1876
 
     # Service containers to run with `container-job`
     services:

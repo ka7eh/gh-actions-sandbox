@@ -1,2 +1,2 @@
-# gh-actions-sandbox
-A sandbox repo to play with Github Actions
+# git-sandbox
+A sandbox repo to play with Git

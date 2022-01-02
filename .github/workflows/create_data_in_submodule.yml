@@ -11,21 +11,21 @@ jobs:
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "bot@noreply.github.com"
 
-      - name: Create ssh key for gh-actions-sandbox-submodule
+      - name: Create ssh key for git-sandbox-submodule
         run: |
           mkdir -p ~/.ssh
-          cat << EOF > ~/.ssh/gh-actions-sandbox-submodule
+          cat << EOF > ~/.ssh/git-sandbox-submodule
           ${{ secrets.SSH_KEY_SUB_MODULE }}
           EOF
-          chmod 600 ~/.ssh/gh-actions-sandbox-submodule
+          chmod 600 ~/.ssh/git-sandbox-submodule
 
       - name: Check out repo
         uses: actions/checkout@v2
 
       - name: Initialize the submodule
         run: |
-          git -c core.sshCommand="ssh -i ~/.ssh/gh-actions-sandbox-submodule -F /dev/null" submodule init
-          git -c core.sshCommand="ssh -i ~/.ssh/gh-actions-sandbox-submodule -F /dev/null" submodule update
+          git -c core.sshCommand="ssh -i ~/.ssh/git-sandbox-submodule -F /dev/null" submodule init
+          git -c core.sshCommand="ssh -i ~/.ssh/git-sandbox-submodule -F /dev/null" submodule update
 
       - name: Setup Python 3.9
         uses: actions/setup-python@v2
@@ -36,11 +36,11 @@ jobs:
         run: python submodules/generate_data.py ${GITHUB_ACTOR}
 
       - name: Commit the submodule changes
-        working-directory: ./gh-actions-sandbox-submodule
+        working-directory: ./git-sandbox-submodule
         run: |
           git add .
           git commit -a -m "Add a new text file by ${GITHUB_ACTOR}"
-          git -c core.sshCommand="ssh -i ~/.ssh/gh-actions-sandbox-submodule -F /dev/null" push origin HEAD:main
+          git -c core.sshCommand="ssh -i ~/.ssh/git-sandbox-submodule -F /dev/null" push origin HEAD:main
 
       - name: Update the submodule ref
         working-directory: ./
